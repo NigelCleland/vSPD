@@ -1,17 +1,17 @@
 $ontext
 ===================================================================================
 Name: runVSPD.gms
-Function: This controls the whole process in standalone mode
+Function: This file controls the whole process when in standalone mode
 Developed by: Ramu Naidoo (Electricity Authority, New Zealand)
-Last modified: 09 October 2012
+Last modified by : Tuong Nguyen on 3 April 2013
 ===================================================================================
 $offtext
 
 $call cls
 $onecho > con
-*****************************************************************
-***********************EXECUTING vSPD v1.3***********************
-*****************************************************************
+*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*+++++++++++++++++++++*EXECUTING vSPD v1.3+++++++++++++++++++++++
+*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 $offecho
 
 *==================================
@@ -22,7 +22,7 @@ $offecho
 $include vSPDpaths.inc
 $include vSPDsettings.inc
 
-*File definition
+*File definitions
 Files
 temp
 vSPDcase "Current input case file being solved" / "vSPDcase.inc" / ; vSPDcase.lw = 0; vSPDcase.sw = 0
@@ -39,25 +39,33 @@ Scalar RunNum  /1/;
 SETS
 *Input file name
 i_FileName(*)       'Filenames'
+*TN - codes added for standalone version ++++++++++++++++++++++++++++++++++++++
+/
+$Include FileNameList.inc
+/
+*TN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;
 
 *If in datawarehouse mode skip the xls file read process
 $if %DWMode%==1 $goto SkipxlsFileRead
 
-* Import input data from Excel data file via GDX.
-* Write arguments for the GDX call to gdxVSPDInputData.ins:
-$ONECHO > gdxInputFileName.ins
-* Parameters and sets
-         set = i_FileName                rng = i_FileName                  rdim = 1
-$OFFECHO
+*TN - Excel interface code removed for standalone version ++++++++++++++++++++++++++++++++++++
+** Import input data from Excel data file via GDX.
+** Write arguments for the GDX call to gdxVSPDInputData.ins:
+*$ONECHO > gdxInputFileName.ins
+** Parameters and sets
+*         set = i_FileName                rng = i_FileName                  rdim = 1
+*$OFFECHO
 
-* Call the GDX routine and load the input data:
-$CALL 'GDXXRW "%ProgramPath%%VSPDInputFileName%.xls" o=InputFileName.gdx "@gdxInputFileName.ins"'
-$GDXIN InputFileName.gdx
+** Call the GDX routine and load the input data:
+*$CALL 'GDXXRW "%ProgramPath%%VSPDInputFileName%.xls" o=InputFileName.gdx "@gdxInputFileName.ins"'
+*$GDXIN InputFileName.gdx
 
-$LOAD i_FileName
-*Close the gdx
-$GDXIN
+*$LOAD i_FileName
+**Close the gdx
+*$GDXIN
+*TN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 *Loop over all the specified files and run the model
 loop(i_FileName,
@@ -106,23 +114,23 @@ loop(i_FileName,
 *$call gams runVSPDReport.gms
 
 *Remove the temp output files
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_SystemOutput.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_OfferOutput.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_TraderOutput.gdx';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_SystemOutput.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_OfferOutput.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_TraderOutput.gdx"';
 
     if (%TradePeriodReports% = 1,
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_SummaryOutput_TP.gdx';
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_IslandOutput_TP.gdx';
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_BusOutput_TP.gdx';
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_BranchOutput_TP.gdx';
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_NodeOutput_TP.gdx';
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_OfferOutput_TP.gdx';
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_ReserveOutput_TP.gdx';
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_BrConstraintOutput_TP.gdx';
-       put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_MNodeConstraintOutput_TP.gdx';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_SummaryOutput_TP.gdx"';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_IslandOutput_TP.gdx"';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_BusOutput_TP.gdx"';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_BranchOutput_TP.gdx"';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_NodeOutput_TP.gdx"';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_OfferOutput_TP.gdx"';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_ReserveOutput_TP.gdx"';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_BrConstraintOutput_TP.gdx"';
+       put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_MNodeConstraintOutput_TP.gdx"';
 *TN - Additional output for audit reporting
       if (%DWMode%=-1,
-         put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_AuditOutput_TP.gdx';
+         put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_AuditOutput_TP.gdx"';
       );
     );
 *TN - Additional output for audit reporting - End
@@ -140,20 +148,20 @@ $if not %DWMode%==1 $goto SkipDWReportProcess
 put_utility temp 'exec' / 'gams runVSPDReport';
 
 *Remove the temp output files
-put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_SystemOutput.gdx';
-put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_OfferOutput.gdx';
-put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_TraderOutput.gdx';
+put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_SystemOutput.gdx';
+put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_OfferOutput.gdx';
+put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_TraderOutput.gdx';
 
 if (%TradePeriodReports% = 1,
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_SummaryOutput_TP.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_IslandOutput_TP.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_BusOutput_TP.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_BranchOutput_TP.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_NodeOutput_TP.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_OfferOutput_TP.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_ReserveOutput_TP.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_BrConstraintOutput_TP.gdx';
-    put_utility temp 'shell' / 'del %OutputPath%%runName%\RunNum'RunNum:0'_MNodeConstraintOutput_TP.gdx';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_SummaryOutput_TP.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_IslandOutput_TP.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_BusOutput_TP.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_BranchOutput_TP.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_NodeOutput_TP.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_OfferOutput_TP.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_ReserveOutput_TP.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_BrConstraintOutput_TP.gdx"';
+    put_utility temp 'shell' / 'del "%OutputPath%%runName%\RunNum'RunNum:0'_MNodeConstraintOutput_TP.gdx"';
 );
 
 $label SkipDWReportProcess
@@ -163,4 +171,3 @@ $label SkipDWReportProcess
 *==================================
 execute 'del *.ins';
 execute 'del InputFileName.gdx';
-

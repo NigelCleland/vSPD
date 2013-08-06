@@ -1,7 +1,8 @@
 if exist report.txt                     erase report.txt /q
+if exist vSPDcase.inc                   erase vSPDcase.inc /q
 if exist runVSPDSetupProgress.txt       erase runVSPDSetupProgress.txt /q
 if exist runVSPDSolveProgress.txt       erase runVSPDSolveProgress.txt /q
 if exist runVSPDMergeProgress.txt       erase runVSPDMergeProgress.txt /q
 if exist runVSPDReportProgress.txt      erase runVSPDReportProgress.txt /q
-if exist "C:\vSPD\Test\Programs\..\Output\Test"        rmdir "C:\vSPD\Test\Programs\..\Output\Test" /s /q
-mkdir "C:\vSPD\Test\Programs\..\Output\Test"
+if exist "Z:\home\nigel\python\vSPDstandalone_v1.3\Programs\..\Output\Test"        rmdir "Z:\home\nigel\python\vSPDstandalone_v1.3\Programs\..\Output\Test" /s /q
+mkdir "Z:\home\nigel\python\vSPDstandalone_v1.3\Programs\..\Output\Test"

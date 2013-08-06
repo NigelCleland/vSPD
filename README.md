@@ -1,15 +1,11 @@
-vSPD
-====
+# vSPD
 
-vectorised Scheduling, Pricing and Dispatch
+Initial Author: Ramu Naidoo, Electricity Authority
+All credit to Ramu.
 
-Plan
-----
+# My modifications:
 
-Goal is to develop a Python based interface for vSPD.
-This should include:
+These modifications are for the stand alone command line version of vSPD.
+I'm intending to develop a series of scripts which can be used to run custom scenarios across a wide number of periods, while outputting the results most likely to a Database.
 
-1. Calling the model
-2. Being able to make changes to the GDX files via python (e.g. to run experiments)
-3. Outputting information from python and load into DataFrames for analysis
-4. Automating the procedure to make running large numbers of experiments possible.
+I'm intending to use python to liase with this and will host the pertinent scripts in the ./Python folder. Should hopefully be able to extend this to automatically develop a new Database to dump the results into. Most likely a table per run result.
