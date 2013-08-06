@@ -2,3 +2,7 @@
 *.pyc
 *.md~
 *.gdx
+*.gpr
+*.inc~
+*.lst
+*.txt
