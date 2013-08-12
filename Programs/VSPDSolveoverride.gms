@@ -511,9 +511,8 @@ i_TradePeriodBranchOpenStatus(i_TradePeriod,'BEN_HAY1.1') = 1;
 i_TradePeriodBranchOpenStatus(i_TradePeriod,'HAY_BEN1.1') = 1;
 
 * Set the Risk Parameters
-i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_HVDCPoleRampUp') = 0;
-i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_FreeReserve') = 0;
-i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_RiskAdjustmentFactor') = 0;
+i_TradePeriodRiskParameter(i_TradePeriod,i_Island,i_ReserveClass,'DCCE','i_HVDCPoleRampUp') = 0;
+i_TradePeriodRiskParameter(i_TradePeriod,i_Island,i_ReserveClass,'DCCE','i_FreeReserve') = 475;
 
 Parameters
 *Override

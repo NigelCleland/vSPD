@@ -1,2 +1,0 @@
-"Date","NumTradePeriodsStudied","ObjectiveFunctionValue ($)","SystemGen (MW(half)h)","SystemLoad (MW(half)h)","SystemLoss (MW(half)h)","SystemViolation (MW(half)h)","SystemFIR (MW(half)h)","SystemSIR (MW(half)h)","SystemGenerationRevenue ($)","SystemLoadCost ($)","SystemNegativeLoadRevenue ($)","SystemSurplus ($)"
-"02-MAR-2013 00:00",1.00,-19303.41,3942.55,3817.85,124.70,0.00,357.72,488.48,137724.02,143732.66,4483.13,1525.51

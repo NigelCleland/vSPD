@@ -487,8 +487,8 @@ i_UseBusNetworkModel(i_TradePeriod) = 1 $ ((InputGDXGDate >= MSPChangeOverGDXGDa
 * Implement the Pole 3 substitutes
 * See if this works properly!
 * Define new northward and southward Pole 3 branch elements
-Set
-i_Branch Pole 3 branches /'BEN_HAY3.1','HAY_BEN3.1'/;
+$onmulti
+set i_Branch /'BEN_HAY3.1','HAY_BEN3.1'/;
 
 * Set up the connectivity to connect pole 3 to the same terminal nodes as pole 2
 i_TradePeriodBranchDefn(i_TradePeriod,'BEN_HAY3.1',i_FromBus,i_ToBus) $ i_TradePeriodBranchDefn(i_TradePeriod,'BEN_HAY2.1',i_FromBus,i_ToBus) = yes;
@@ -501,6 +501,19 @@ i_TradePeriodHVDCBranch(i_TradePeriod,'HAY_BEN3.1') = 1;
 * Set up the parameters of Pole 3, use the same as Pole 2.
 i_TradePeriodBranchParameter(i_TradePeriod,'BEN_HAY3.1',i_BranchParameter) = i_TradePeriodBranchParameter(i_TradePeriod,'BEN_HAY2.1',i_BranchParameter);
 i_TradePeriodBranchParameter(i_TradePeriod,'HAY_BEN3.1',i_BranchParameter) = i_TradePeriodBranchParameter(i_TradePeriod,'HAY_BEN2.1',i_BranchParameter);
+
+* Define the capacity of Pole 3
+i_TradePeriodBranchCapacity(i_TradePeriod,'BEN_HAY3.1') = 700;
+i_TradePeriodBranchCapacity(i_TradePeriod,'HAY_BEN3.1') = 700;
+
+* Turn Pole 1 off
+i_TradePeriodBranchOpenStatus(i_TradePeriod,'BEN_HAY1.1') = 1;
+i_TradePeriodBranchOpenStatus(i_TradePeriod,'HAY_BEN1.1') = 1;
+
+* Set the Risk Parameters
+i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_HVDCPoleRampUp') = 0;
+i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_FreeReserve') = 0;
+i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_RiskAdjustmentFactor') = 0;
 
 Parameters
 *Override

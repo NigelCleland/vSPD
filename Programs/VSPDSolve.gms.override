@@ -510,11 +510,6 @@ i_TradePeriodBranchCapacity(i_TradePeriod,'HAY_BEN3.1') = 700;
 i_TradePeriodBranchOpenStatus(i_TradePeriod,'BEN_HAY1.1') = 1;
 i_TradePeriodBranchOpenStatus(i_TradePeriod,'HAY_BEN1.1') = 1;
 
-* Set the Risk Parameters
-i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_HVDCPoleRampUp') = 0;
-i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_FreeReserve') = 0;
-i_TradePeriodRiskParameter(i_TradePeriod,'NI',i_ReserveClass,i_RiskClass,'i_RiskAdjustmentFactor') = 0;
-
 Parameters
 *Override
 i_TradePeriodSolve(i_TradePeriod)                                                'Trade periods to solve'

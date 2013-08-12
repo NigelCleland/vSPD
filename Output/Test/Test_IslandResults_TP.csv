@@ -1,3 +1,0 @@
-"DateTime","Island","Gen (MW)","Load (MW)","IslandACLoss (MW)","HVDCFlow (MW)","HVDCLoss (MW)","ReferencePrice ($/MWh)","FIR (MW)","SIR (MW)","FIR Price ($/MWh)","SIR Price ($/MWh)","GenerationRevenue ($)","LoadCost ($)","NegativeLoadRevenue ($)"
-"02-MAR-2013 07:00","NI",2212.98,2242.37,45.93,0.00,1.32,71.00,269.48,367.48,1.75,2.00,75312.35,82103.15,4136.58
-"02-MAR-2013 07:00","SI",1729.56,1575.48,76.71,76.63,0.75,70.48,88.25,121.00,0.02,0.02,62411.66,61629.51,346.55
